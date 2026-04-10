@@ -1,0 +1,85 @@
+/* Configuração Global */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial Black', sans-serif;
+    overflow: hidden;
+}
+
+/* Container da Lista */
+.menu-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: 90vh;
+}
+
+.menu-list li {
+    margin: 10px 0;
+}
+
+/* Estilo das Palavras */
+.menu-item {
+    position: relative;
+    font-size: 4rem;
+    cursor: pointer;
+    display: inline-block;
+    white-space: nowrap;
+    
+    /* Estado Inicial: Miolo transparente e contorno branco */
+    color: transparent;
+    -webkit-text-stroke: 1.5px white;
+    
+    /* Transição suave de todas as propriedades */
+    transition: color 0.5s ease-in-out, -webkit-text-stroke 0.5s ease-in-out;
+}
+
+/* A Agulha (Playhead) */
+.menu-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -40px; /* Distância de 40px */
+    width: 4px;
+    height: 100%;
+    background-color: #ffffff; 
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    opacity: 1;
+    pointer-events: none;
+    
+    /* Movimento da agulha */
+    transition: 
+        left 0.7s cubic-bezier(0.4, 0, 0.2, 1), 
+        background-color 0.3s ease, 
+        box-shadow 0.3s ease;
+}
+
+/* Efeito ao passar o Mouse (Hover) */
+.menu-item:hover {
+    /* Em vez de remover o contorno, mudamos a cor dele para a mesma do preenchimento */
+    /* Isso evita que a letra "suma" durante a transição */
+    color: #00d4ff; 
+    -webkit-text-stroke: 1.5px #00d4ff; 
+}
+
+.menu-item:hover::after {
+    left: calc(100% + 40px); 
+    background-color: #00d4ff;
+    box-shadow: 0 0 15px #00d4ff;
+}
+
+/* Ajustes de Responsividade */
+@media (max-height: 700px) {
+    .menu-item { font-size: 3rem; }
+}
+
+@media (max-width: 600px) {
+    .menu-item { font-size: 2.2rem; }
+}
